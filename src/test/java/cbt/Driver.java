@@ -18,12 +18,16 @@ import java.net.URL;
 public class Driver {
     static String browser;
 
+    static ChromeOptions option = new ChromeOptions();
+
+
     private Driver() {
     }
 
     private static WebDriver driver;
 
     public static WebDriver getDriver() {
+        option.addArguments("--remote-allow-origins=*");
         if (driver == null) {
             if (System.getProperty("BROWSER") == null) {
                 browser = ConfigurationReader.getProperty("browser");
@@ -35,7 +39,7 @@ public class Driver {
                 case "remote-chrome":
                     try {
                         // assign your grid server address
-                        String gridAddress = "52.87.252.7";
+                        String gridAddress = "54.175.225.58";
                         URL url = new URL("http://" + gridAddress + ":4444/wd/hub");
                         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
                         desiredCapabilities.setBrowserName("chrome");
@@ -46,7 +50,7 @@ public class Driver {
                     break;
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    driver = new ChromeDriver(option);
                     break;
                 case "chrome-headless":
                     WebDriverManager.chromedriver().setup();
