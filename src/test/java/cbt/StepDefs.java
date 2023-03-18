@@ -32,6 +32,7 @@ public class StepDefs {
         Driver.getDriver().findElement(By.cssSelector("[id*='search-query']")).sendKeys(search + Keys.ENTER);
     }
 
+
     @Then("^I should see the results$")
     public void i_should_see_the_results() throws Throwable {
         Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains("search"));
